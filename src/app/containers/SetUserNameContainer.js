@@ -1,15 +1,17 @@
 import { connect } from "react-redux";
 import SetUserName from "../components/SetUserName";
-import {setProfileData} from "../services/actions/profileAction";
+import {setProfileData,onSubmitAddProfileData} from "../services/actions/profileAction";
 
 const mapStateToProps=(state)=>({
+    pageLoader:state.pageLoader.loader,
     profileVerification:state.profile.profileVerification,
-    profileId:state.profile.profileId,
-    profileData:state.profile.profileData,
+    setUserNameProcess:state.profile.setUserNameProcess,
+    profileUpdateError:state.profile.profileUpdateError
 })
 
 const mapDispatchToProps=(dispatch)=>({
     setProfileData:()=>dispatch(setProfileData()),
+    onSubmitAddProfileData:(data)=>dispatch(onSubmitAddProfileData(data))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(SetUserName)
