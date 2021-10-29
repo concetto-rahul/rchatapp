@@ -27,7 +27,7 @@ const SetUserName=(props)=>{
 
     return(
         <>
-         { pageLoader?<PageLoader />:"" }
+        { pageLoader?<PageLoader />:"" }
         {
           setUserNameProcess=="ProfileNotAdded"?
           <div id="app">
@@ -43,18 +43,19 @@ const SetUserName=(props)=>{
                     <div className="card-body">
 
                         <form method="POST" action="" onSubmit={onSaveNameSubmit}>
-                          <div className="form-group">
-                            <label htmlFor="profileFile">Profile Photo</label>
-                            <input id="profileFile" type="file" className="form-control" name="profileFile" tabIndex="0"/>
+                          <div className="form-group" style={{display:"none"}}>
+                            <label htmlFor="profileFile">Profile Photo <small>( jpg,jpeg,png * )</small></label>
+                            <input id="profileFile" type="file" className={profileUpdateError && profileUpdateError.profileFile?"form-control is-invalid":"form-control"} name="profileFile" tabIndex="0" accept=".png, .jpg, .jpeg"/>
+                            {profileUpdateError && profileUpdateError.profileFile?<div className="invalid-feedback">{profileUpdateError.profileFile}</div>:""}
                           </div>
                           <div className="form-group">
                             <label htmlFor="profileName">Profile Name</label>
-                            <input id="profileName" type="text" className={profileUpdateError && profileUpdateError.profileName?"form-control is-invalid":"form-control"} name="profileName" tabIndex="1" autoFocus/>
+                            <input id="profileName" type="text" className={profileUpdateError && profileUpdateError.profileName?"form-control is-invalid":"form-control"} name="profileName" tabIndex="1" autoComplete="off" required/>
                             {profileUpdateError && profileUpdateError.profileName?<div className="invalid-feedback">{profileUpdateError.profileName}</div>:""}
                           </div>
                           <div className="form-group">
                             <label htmlFor="profileStatus">Profile Status</label>
-                            <input id="profileStatus" type="text" className={profileUpdateError && profileUpdateError.profileStatus?"form-control is-invalid":"form-control"} name="profileStatus" tabIndex="2" autoFocus/>
+                            <input id="profileStatus" type="text" className={profileUpdateError && profileUpdateError.profileStatus?"form-control is-invalid":"form-control"} name="profileStatus" tabIndex="2" autoComplete="off" required/>
                             {profileUpdateError && profileUpdateError.profileStatus?<div className="invalid-feedback">{profileUpdateError.profileStatus}</div>:""}
                           </div>
                           <div className="form-group">

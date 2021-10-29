@@ -1,5 +1,6 @@
-const Dashboard=()=>{
-
+const Dashboard=(props)=>{
+    const { listAllUsers }=props;
+    console.log(listAllUsers());
     return(
         <>
         <div className="section-header">

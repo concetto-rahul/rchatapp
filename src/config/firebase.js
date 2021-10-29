@@ -12,7 +12,6 @@ const firebaseApp = initializeApp({
     appId: "1:691850958008:web:427ad46173eb71955ad04d",
     measurementId: "G-DSK1F96KCL"
 });
-
 export const auth=getAuth();
 export const db = getFirestore();
 export const storage = getStorage(firebaseApp);

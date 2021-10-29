@@ -1,12 +1,25 @@
-import { useState } from "react/cjs/react.development"
+import React, { useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import PageLoader from "../PageLoader";
+
+
 const AdminLayout=(props)=>{
+    const {pageLoader,setProfileData,profileData}=props;
     const [profileDropdown,setProfileDropdown]=useState(false);
+    const history=useHistory();
+    const profileIcon=profileData.profilePhotoURL?profileData.profilePhotoURL:"/img/avatar/avatar-1.png";
+    useLayoutEffect(()=>{
+      setProfileData();
+    },[]);
+
     const showProfileMenu=()=>{
         setProfileDropdown(!profileDropdown);
     }
+
     return(
         <>
+            { pageLoader?<PageLoader />:"" }
             <div id="app">
                 <div className="main-wrapper">
                 <div className="navbar-bg"></div>
@@ -19,8 +32,8 @@ const AdminLayout=(props)=>{
                         </li>
                         <li className={profileDropdown?"dropdown w-50 show":"dropdown w-50"}>
                             <a href="#nav" onClick={showProfileMenu} data-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user float-right">
-                                <img alt="" src="/img/avatar/avatar-1.png" className="rounded-circle mr-1"/>
-                                <div className="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                                <img alt="" src={profileIcon} className="rounded-circle mr-1"/>
+                                <div className="d-sm-none d-lg-inline-block">Hi, {profileData.profileName}</div>
                             </a>
                             <div className={profileDropdown?"dropdown-menu dropdown-menu-right show":"dropdown-menu dropdown-menu-right"}>
                                 <div className="dropdown-title">Logged in 5 min ago</div>
@@ -39,6 +52,7 @@ const AdminLayout=(props)=>{
                                 </Link>
                             </div>
                         </li>
+                        
                     </ul>
                 </nav>
                 <div className="main-content">
